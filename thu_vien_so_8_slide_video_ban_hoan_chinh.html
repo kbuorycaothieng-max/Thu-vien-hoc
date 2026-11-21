@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Thư viện số cá nhân - 8 slide học tập và video theo từng slide">
+<title>Thư viện số | Y Cao Thiêng Kbuôr</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f5f7fc;--surface:#fff;--surface2:#eef2fa;--text:#17213a;--muted:#68738c;--primary:#f36b21;--blue:#4268d5;--line:#e1e6f0;--shadow:0 15px 45px rgba(30,48,90,.09);--radius:20px}
+body.dark{--bg:#101522;--surface:#192235;--surface2:#222e45;--text:#edf2ff;--muted:#aab5cb;--primary:#ff8745;--blue:#8da8ff;--line:#303d55;--shadow:0 15px 45px rgba(0,0,0,.25)}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{font-family:'Be Vietnam Pro',Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;transition:.25s}
+a{color:inherit;text-decoration:none}button,input,textarea{font:inherit}.container{width:min(1160px,92%);margin:auto}
+header{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--surface) 90%,transparent);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav{height:72px;display:flex;align-items:center;justify-content:space-between;gap:16px}.logo{font-weight:800;color:var(--primary);font-size:1.1rem}.logo span{display:block;font-size:.62rem;letter-spacing:1.7px;color:var(--muted)}
+.navlinks{display:flex;gap:18px}.navlinks a{font-size:.83rem;color:var(--muted);font-weight:600}.navlinks a:hover{color:var(--primary)}
+.nav-actions{display:flex;gap:8px}.icon-btn,.menu-btn{border:1px solid var(--line);background:var(--surface);color:var(--text);border-radius:11px;padding:9px 12px;cursor:pointer}.menu-btn{display:none}
+.hero{padding:65px 0 45px}.hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:30px;align-items:center}
+.eyebrow,.tag{display:inline-block;padding:6px 11px;background:var(--surface2);border-radius:99px;color:var(--primary);font-size:.76rem;font-weight:800}
+h1{font-size:clamp(2.2rem,5vw,4.1rem);line-height:1.13;letter-spacing:-1.7px;margin:18px 0}.gradient{background:linear-gradient(100deg,var(--primary),#e64e62,var(--blue));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p,.section-desc{color:var(--muted);max-width:650px}.hero-buttons{display:flex;gap:10px;flex-wrap:wrap;margin-top:23px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:10px 16px;border-radius:12px;font-weight:700;border:1px solid var(--line);cursor:pointer;background:var(--surface);color:var(--text);transition:.2s}
+.btn:hover{transform:translateY(-2px)}.btn-primary{background:var(--primary);color:white;border-color:var(--primary)}.btn-small{padding:8px 12px;font-size:.84rem}
+.profile-card,.card,.lesson,.viewer,.resource,.upload-box,.note-preview{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+.profile-card{padding:25px}.avatar{width:65px;height:65px;border-radius:20px;background:linear-gradient(135deg,var(--primary),#ffbd73);display:grid;place-items:center;color:white;font-size:1.8rem;font-weight:800;margin-bottom:14px}
+.profile-card p{color:var(--muted);font-size:.9rem}.profile-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.section{padding:48px 0}.section-head{margin-bottom:22px}.kicker{color:var(--primary);font-weight:800;font-size:.75rem;letter-spacing:1.5px;text-transform:uppercase}
+h2{font-size:clamp(1.6rem,3vw,2.35rem);line-height:1.25;margin:4px 0 7px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{padding:20px}.card-icon{font-size:1.5rem;margin-bottom:8px}.card p,.lesson p{font-size:.87rem;color:var(--muted)}
+.lesson-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.lesson{padding:16px;text-align:left;cursor:pointer;color:var(--text);transition:.2s}
+.lesson:hover,.lesson.active{border-color:var(--primary);transform:translateY(-3px);background:var(--surface2)}.lesson-no{color:var(--primary);font-size:1.15rem;font-weight:800}.lesson h3{font-size:.94rem;margin:3px 0}
+.viewer{padding:20px;margin-top:18px}.viewer-top{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
+.viewer-top h3{font-size:1.15rem}.slide-counter{color:var(--muted);font-size:.86rem}
+.viewer-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:16px}
+.panel{border:1px solid var(--line);border-radius:15px;overflow:hidden;background:var(--surface2);min-width:0}
+.panel-head{padding:12px 14px;font-weight:800;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:8px}
+.slide-stage{min-height:330px;display:grid;place-items:center;padding:14px;background:var(--surface2)}
+.slide-stage img{max-width:100%;max-height:560px;object-fit:contain;border-radius:8px}.slide-stage iframe{width:100%;height:520px;border:0;background:white}.empty-state{text-align:center;color:var(--muted);padding:35px 18px}.empty-state strong{display:block;color:var(--text);margin-bottom:5px}
+.video-stage{min-height:260px;display:grid;place-items:center;background:#090d16}.video-stage video,.video-stage iframe{width:100%;aspect-ratio:16/9;border:0;display:block}.video-empty{color:#d4d9e5;text-align:center;padding:25px}
+.panel-actions{display:flex;gap:8px;flex-wrap:wrap;padding:12px}.url-row{padding:0 12px 12px;display:flex;gap:7px}.url-row input{min-width:0;flex:1}
+input[type=text],textarea{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--text);outline:none}
+input:focus,textarea:focus{border-color:var(--primary)}
+.slide-nav{display:flex;justify-content:space-between;gap:10px;margin-top:15px;flex-wrap:wrap}.slide-nav .group{display:flex;gap:8px}
+.resource-list{display:grid;gap:10px}.resource{padding:15px 18px;display:flex;justify-content:space-between;gap:12px;align-items:center}.resource small{display:block;color:var(--muted)}.resource a{color:var(--blue);font-weight:800}
+.upload-box{padding:22px;text-align:center}.note-layout{display:grid;grid-template-columns:1fr 1fr;gap:16px}textarea{min-height:160px;resize:vertical}.note-preview{padding:16px;white-space:pre-wrap;color:var(--muted);min-height:160px}
+footer{padding:30px 0;border-top:1px solid var(--line);text-align:center;color:var(--muted);font-size:.84rem}
+.progress{position:fixed;top:0;left:0;height:3px;background:var(--primary);width:0;z-index:30}
+@media(max-width:850px){.navlinks{display:none;position:absolute;top:72px;left:0;right:0;background:var(--surface);padding:16px 5%;border-bottom:1px solid var(--line);flex-direction:column}.navlinks.open{display:flex}.menu-btn{display:block}.hero-grid,.viewer-grid{grid-template-columns:1fr}.lesson-grid{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.grid,.note-layout{grid-template-columns:1fr}.lesson-grid{grid-template-columns:repeat(2,1fr)}.hero{padding:42px 0 30px}.section{padding:35px 0}.slide-stage{min-height:230px}.slide-stage iframe{height:350px}.resource{align-items:flex-start;flex-direction:column}.viewer{padding:12px}}
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<header><div class="container nav">
+<a class="logo" href="#home">FPT POLYTECHNIC<span>PERSONAL DIGITAL LIBRARY</span></a>
+<nav class="navlinks" id="navlinks"><a href="#home">Trang chủ</a><a href="#gioithieu">Giới thiệu</a><a href="#bai-hoc">8 Slide</a><a href="#tai-lieu">Tài liệu</a><a href="#ghi-chu">Ghi chú</a></nav>
+<div class="nav-actions"><button class="icon-btn" id="themeBtn" aria-label="Đổi giao diện">🌙</button><button class="menu-btn" id="menuBtn" aria-label="Mở menu">☰</button></div>
+</div></header>
+<main>
+<section class="hero" id="home"><div class="container hero-grid">
+<div><span class="eyebrow">✦ KHÔNG GIAN HỌC TẬP CỦA TÔI</span><h1>Khám phá tri thức<br><span class="gradient">theo cách của bạn.</span></h1>
+<p>Thư viện số cá nhân – nơi lưu trữ 8 slide bài học, video minh họa, tài liệu và ghi chú trong quá trình học tập tại FPT Polytechnic.</p>
+<div class="hero-buttons"><a class="btn btn-primary" href="#bai-hoc">Mở 8 slide ↗</a><a class="btn" href="#tai-lieu">Xem tài liệu</a></div></div>
+<aside class="profile-card"><div class="avatar">YK</div><span class="kicker">SINH VIÊN FPT POLYTECHNIC</span><h3>Y Cao Thiêng Kbuôr</h3><p>Họ và tên: Y Cao Thiêng Kbuôr</p><p>MSSV: PK04955</p><div class="profile-meta"><span class="tag">📚 Thư viện số</span><span class="tag">💻 Học tập chủ động</span></div></aside>
+</div></section>
+<section class="section" id="gioithieu"><div class="container"><div class="section-head"><div class="kicker">01 / Giới thiệu</div><h2>Một góc nhỏ lưu giữ tri thức</h2><p class="section-desc">Chọn từng slide để xem nội dung và video tương ứng. Bạn có thể tự tải tư liệu từ máy tính lên từng mục.</p></div>
+<div class="grid"><article class="card"><div class="card-icon">🎯</div><h3>Mục tiêu</h3><p>Sắp xếp nội dung học tập thành 8 phần rõ ràng, dễ xem và dễ ôn tập.</p></article><article class="card"><div class="card-icon">🎬</div><h3>Video theo slide</h3><p>Mỗi slide có trình phát video riêng hoặc có thể dán đường dẫn YouTube.</p></article><article class="card"><div class="card-icon">📂</div><h3>Tư liệu cá nhân</h3><p>Hỗ trợ hình ảnh, PDF và video được chọn trực tiếp từ máy tính.</p></article></div></div></section>
+
+<section class="section" id="bai-hoc"><div class="container">
+<div class="section-head"><div class="kicker">02 / Nội dung môn học</div><h2>Trình xem Slide 1 đến Slide 8</h2><p class="section-desc">Chọn một slide bên dưới. Tải ảnh/PDF của slide và video tương ứng để xem ngay trong website.</p></div>
+<div class="lesson-grid" id="lessonGrid"></div>
+<div class="viewer">
+<div class="viewer-top"><div><div class="kicker">ĐANG XEM</div><h3 id="currentTitle">Slide 1 – Nội dung bài học</h3></div><span class="slide-counter" id="slideCounter">Slide 1 / 8</span></div>
+<div class="viewer-grid">
+<div class="panel"><div class="panel-head"><span>📄 Nội dung slide</span><span id="slideFileName" class="slide-counter">Chưa có tệp</span></div>
+<div class="slide-stage" id="slideStage"><div class="empty-state"><strong>Chưa có nội dung Slide 1</strong>Chọn “Tải slide” để thêm ảnh JPG/PNG hoặc tài liệu PDF.</div></div>
+<div class="panel-actions"><label class="btn btn-primary btn-small" for="slideUpload">＋ Tải slide</label><input id="slideUpload" type="file" accept="image/*,.pdf" hidden><button class="btn btn-small" id="removeSlide">Xóa slide</button></div></div>
+<div class="panel"><div class="panel-head"><span>🎬 Video của slide</span><span class="slide-counter" id="videoStatus">Chưa có video</span></div>
+<div class="video-stage" id="videoStage"><div class="video-empty">Video của slide này sẽ hiển thị tại đây.</div></div>
+<div class="panel-actions"><label class="btn btn-primary btn-small" for="videoUpload">＋ Tải video</label><input id="videoUpload" type="file" accept="video/*" hidden><button class="btn btn-small" id="removeVideo">Xóa video</button></div>
+<div class="url-row"><input type="text" id="videoUrl" placeholder="Dán link YouTube hoặc link video"><button class="btn btn-small" id="saveVideoUrl">Lưu link</button></div>
+</div></div>
+<div class="slide-nav"><div class="group"><button class="btn" id="prevSlide">← Slide trước</button><button class="btn" id="nextSlide">Slide tiếp theo →</button></div><span class="slide-counter">Tệp được lưu trên trình duyệt này; thiết bị khác cần tải lại.</span></div>
+</div></div></section>
+
+<section class="section" id="tai-lieu"><div class="container"><div class="section-head"><div class="kicker">03 / Kho lưu trữ</div><h2>Tài liệu học tập</h2><p class="section-desc">Chọn tài liệu PDF, Word hoặc TXT từ máy tính để xem tên tệp trong danh sách. Tệp trong khu vực này chỉ liệt kê tên, không tải lên máy chủ.</p></div><div class="upload-box"><h3>📂 Thêm tài liệu</h3><input type="file" id="fileInput" multiple accept=".pdf,.doc,.docx,.txt"><div id="fileList" style="margin-top:12px;text-align:left"></div></div></div></section>
+
+<section class="section" id="ghi-chu"><div class="container"><div class="section-head"><div class="kicker">04 / Nhật ký học tập</div><h2>Ghi chú cá nhân</h2><p class="section-desc">Ghi chú được lưu trên trình duyệt bằng Local Storage.</p></div><div class="note-layout"><div><textarea id="noteInput" placeholder="Viết ghi chú học tập của bạn..."></textarea><div style="display:flex;gap:8px;margin-top:9px"><button class="btn btn-primary" id="saveNote">Lưu ghi chú</button><button class="btn" id="clearNote">Xóa nội dung</button></div></div><div class="note-preview" id="notePreview">Ghi chú đã lưu sẽ xuất hiện ở đây.</div></div></div></section>
+</main>
+<footer><div class="container"><b>Y Cao Thiêng Kbuôr · PK04955</b><br>FPT Polytechnic · Thư viện số cá nhân<br>Học tập hôm nay – phát triển ngày mai ✨</div></footer>
+
+<script>
+const titles = [
+ 'Slide 1 – Tổng quan kiến thức','Slide 2 – Tìm kiếm thông tin',
+ 'Slide 3 – Đánh giá nguồn tin','Slide 4 – Khai thác tài liệu',
+ 'Slide 5 – Quản lý thư viện số','Slide 6 – Học tập với AI',
+ 'Slide 7 – Tổng hợp và trình bày','Slide 8 – Ôn tập và ứng dụng'
+];
+const slides = Array.from({length:8},()=>({slideUrl:null,slideType:null,slideName:'',videoUrl:null,videoType:null,videoName:''}));
+let current = 0;
+const $ = id => document.getElementById(id);
+
+// Lưu ảnh/PDF/video trong IndexedDB để vẫn còn sau khi đóng và mở lại trình duyệt.
+const DB_NAME = 'ThuVienSo8SlideDB';
+const DB_VERSION = 1;
+let db;
+function openLibraryDB(){
+ return new Promise((resolve,reject)=>{
+  const request=indexedDB.open(DB_NAME,DB_VERSION);
+  request.onupgradeneeded=()=>{const database=request.result;if(!database.objectStoreNames.contains('media'))database.createObjectStore('media');};
+  request.onsuccess=()=>resolve(request.result);
+  request.onerror=()=>reject(request.error);
+ });
+}
+function saveMedia(key,file){
+ return new Promise((resolve,reject)=>{
+  const tx=db.transaction('media','readwrite');
+  tx.objectStore('media').put(file,key);
+  tx.oncomplete=()=>resolve();
+  tx.onerror=()=>reject(tx.error);
+ });
+}
+function getMedia(key){
+ return new Promise((resolve,reject)=>{
+  const tx=db.transaction('media','readonly');
+  const request=tx.objectStore('media').get(key);
+  request.onsuccess=()=>resolve(request.result||null);
+  request.onerror=()=>reject(request.error);
+ });
+}
+function deleteMedia(key){
+ return new Promise((resolve,reject)=>{
+  const tx=db.transaction('media','readwrite');
+  tx.objectStore('media').delete(key);
+  tx.oncomplete=()=>resolve();
+  tx.onerror=()=>reject(tx.error);
+ });
+}
+function mediaKey(index,kind){return `slide-${index}-${kind}`;}
+async function restoreMedia(){
+ for(let i=0;i<8;i++){
+  for(const kind of ['slide','video']){
+   const file=await getMedia(mediaKey(i,kind));
+   if(!file)continue;
+   const url=URL.createObjectURL(file);
+   if(kind==='slide'){slides[i].slideUrl=url;slides[i].slideType=file.type==='application/pdf'?'pdf':'image';slides[i].slideName=file.name||'Tệp slide';}
+   else{slides[i].videoUrl=url;slides[i].videoType='file';slides[i].videoName=file.name||'Video';}
+  }
+ }
+ renderCurrent();
+}
+function renderLessonButtons(){
+ $('lessonGrid').innerHTML='';
+ titles.forEach((title,i)=>{
+  const b=document.createElement('button');b.className='lesson'+(i===current?' active':'');
+  b.innerHTML=`<div class="lesson-no">0${i+1}</div><h3>${title}</h3><p>Nhấn để mở nội dung và video</p>`;
+  b.addEventListener('click',()=>selectSlide(i));$('lessonGrid').appendChild(b);
+ });
+}
+function renderCurrent(){
+ const item=slides[current];
+ $('currentTitle').textContent=titles[current];$('slideCounter').textContent=`Slide ${current+1} / 8`;
+ $('slideFileName').textContent=item.slideName||'Chưa có tệp';
+ $('slideStage').innerHTML='';
+ if(item.slideUrl){
+  if(item.slideType==='pdf'){const f=document.createElement('iframe');f.src=item.slideUrl;f.title=titles[current];$('slideStage').appendChild(f);}
+  else {const img=document.createElement('img');img.src=item.slideUrl;img.alt=titles[current];$('slideStage').appendChild(img);}
+ }else $('slideStage').innerHTML=`<div class="empty-state"><strong>Chưa có nội dung ${titles[current]}</strong>Chọn “Tải slide” để thêm ảnh JPG/PNG hoặc tài liệu PDF.</div>`;
+ $('videoStage').innerHTML='';
+ $('videoUrl').value=item.videoType==='youtube'?item.videoUrl||'':'';
+ $('videoStatus').textContent=item.videoUrl?'Đã có video':'Chưa có video';
+ if(item.videoUrl){
+  if(item.videoType==='youtube'){const f=document.createElement('iframe');f.src=item.videoUrl;f.title='Video '+(current+1);f.allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';f.allowFullscreen=true;$('videoStage').appendChild(f);}
+  else {const v=document.createElement('video');v.src=item.videoUrl;v.controls=true;v.playsInline=true;$('videoStage').appendChild(v);}
+ }else $('videoStage').innerHTML='<div class="video-empty">Chưa có video cho slide này.<br>Hãy tải video hoặc dán link YouTube.</div>';
+ $('prevSlide').disabled=current===0;$('nextSlide').disabled=current===7;
+ $('prevSlide').style.opacity=current===0?'.45':'1';$('nextSlide').style.opacity=current===7?'.45':'1';
+ renderLessonButtons();
+}
+function selectSlide(i){current=Math.max(0,Math.min(7,i));renderCurrent();}
+function revoke(url){if(url&&url.startsWith('blob:'))URL.revokeObjectURL(url);}
+$('slideUpload').addEventListener('change',async e=>{
+ const file=e.target.files[0];if(!file)return;
+ if(!file.type.startsWith('image/')&&file.type!=='application/pdf'){alert('Vui lòng chọn ảnh hoặc tệp PDF.');e.target.value='';return;}
+ try{
+  await saveMedia(mediaKey(current,'slide'),file);
+  const item=slides[current];revoke(item.slideUrl);item.slideUrl=URL.createObjectURL(file);item.slideType=file.type==='application/pdf'?'pdf':'image';item.slideName=file.name;renderCurrent();
+ }catch(err){alert('Không thể lưu tệp. Có thể dung lượng trình duyệt đã đầy.');}
+ e.target.value='';
+});
+$('videoUpload').addEventListener('change',async e=>{
+ const file=e.target.files[0];if(!file)return;
+ if(!file.type.startsWith('video/')){alert('Vui lòng chọn tệp video.');e.target.value='';return;}
+ try{
+  await saveMedia(mediaKey(current,'video'),file);
+  const item=slides[current];revoke(item.videoUrl);item.videoUrl=URL.createObjectURL(file);item.videoType='file';item.videoName=file.name;renderCurrent();$('videoUrl').value='';
+ }catch(err){alert('Không thể lưu video. Video có thể quá lớn hoặc dung lượng trình duyệt đã đầy.');}
+ e.target.value='';
+});
+function youtubeEmbed(value){
+ try{
+  const u=new URL(value);
+  let id='';
+  if(u.hostname.includes('youtu.be'))id=u.pathname.slice(1);
+  else if(u.hostname.includes('youtube.com')){if(u.pathname==='/watch')id=u.searchParams.get('v')||'';else if(u.pathname.startsWith('/embed/'))id=u.pathname.split('/')[2];else if(u.pathname.startsWith('/shorts/'))id=u.pathname.split('/')[2];}
+  return id?`https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}`:null;
+ }catch{return null;}
+}
+$('saveVideoUrl').addEventListener('click',async()=>{
+ const value=$('videoUrl').value.trim();if(!value){alert('Hãy dán đường dẫn video trước.');return;}
+ const embed=youtubeEmbed(value);
+ if(!embed){alert('Đường dẫn chưa đúng định dạng YouTube. Bạn có thể tải trực tiếp tệp video từ máy tính.');return;}
+ const item=slides[current];revoke(item.videoUrl);item.videoUrl=embed;item.videoType='youtube';item.videoName='YouTube';await deleteMedia(mediaKey(current,'video'));renderCurrent();
+});
+$('removeSlide').addEventListener('click',async()=>{const x=slides[current];revoke(x.slideUrl);x.slideUrl=null;x.slideType=null;x.slideName='';await deleteMedia(mediaKey(current,'slide'));renderCurrent();});
+$('removeVideo').addEventListener('click',async()=>{const x=slides[current];revoke(x.videoUrl);x.videoUrl=null;x.videoType=null;x.videoName='';await deleteMedia(mediaKey(current,'video'));renderCurrent();});
+$('prevSlide').addEventListener('click',()=>selectSlide(current-1));$('nextSlide').addEventListener('click',()=>selectSlide(current+1));
+document.addEventListener('keydown',e=>{if(e.target.matches('input,textarea'))return;if(e.key==='ArrowLeft')selectSlide(current-1);if(e.key==='ArrowRight')selectSlide(current+1);});
+$('themeBtn').addEventListener('click',()=>{document.body.classList.toggle('dark');const dark=document.body.classList.contains('dark');$('themeBtn').textContent=dark?'☀️':'🌙';localStorage.setItem('libraryTheme',dark?'dark':'light');});
+if(localStorage.getItem('libraryTheme')==='dark'){document.body.classList.add('dark');$('themeBtn').textContent='☀️';}
+$('menuBtn').addEventListener('click',()=>$('navlinks').classList.toggle('open'));
+document.querySelectorAll('.navlinks a').forEach(a=>a.addEventListener('click',()=>$('navlinks').classList.remove('open')));
+window.addEventListener('scroll',()=>{const max=document.documentElement.scrollHeight-window.innerHeight;$('progress').style.width=(max>0?window.scrollY/max*100:0)+'%';});
+$('fileInput').addEventListener('change',e=>{$('fileList').innerHTML='';[...e.target.files].forEach(file=>{const row=document.createElement('div');row.style.cssText='padding:9px 12px;margin-top:7px;background:var(--surface2);border-radius:9px';row.textContent='📄 '+file.name+' · '+(file.size/1024).toFixed(1)+' KB';$('fileList').appendChild(row);});});
+$('noteInput').value=localStorage.getItem('libraryNote')||'';$('notePreview').textContent=$('noteInput').value||'Ghi chú đã lưu sẽ xuất hiện ở đây.';
+$('saveNote').addEventListener('click',()=>{localStorage.setItem('libraryNote',$('noteInput').value);$('notePreview').textContent=$('noteInput').value||'Bạn chưa nhập ghi chú nào.';});
+$('clearNote').addEventListener('click',()=>{$('noteInput').value='';localStorage.removeItem('libraryNote');$('notePreview').textContent='Ghi chú đã được xóa.';});
+// Khởi tạo cơ sở dữ liệu, khôi phục tư liệu đã tải ở lần trước.
+(async()=>{
+ try{db=await openLibraryDB();await restoreMedia();}
+ catch(err){console.error(err);renderCurrent();alert('Trình duyệt không hỗ trợ lưu trữ tệp lâu dài. Bạn vẫn có thể sử dụng website trong phiên hiện tại.');}
+})();
+</script>
+</body></html>
